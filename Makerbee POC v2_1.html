@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makerbee Pilot Store</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Verdana, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+        }
+
+        footer {
+            padding: 20px 20px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-top: 30px;
+            background-color: #fde89c;
+        }
+
+        .footer img {
+            max-height: 40px;
+            width:auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            max-height: 80px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: #777;
+            text-decoration: underline;
+        }
+
+        nav_footer {
+            display: flex;
+            gap: 20px;
+        }
+        
+        nav_footer a {
+            text-decoration: none;
+            color: #364F6A;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+        
+        nav_footer a:hover {
+            color: #5E489B;
+            text-decoration: underline;
+        }
+        
+        .filters {
+            margin-bottom: 30px;
+        }
+        
+        .category-filter {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .category-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: #777;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.2s;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            color: #333;
+        }
+        
+        .category-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #333;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-name {
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .product-category {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            nav {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="">
+                    <img src="Madelogo.png" alt="Makerbee Pilot Store Logo">
+                </a>
+            </div>
+        </nav>
+        <nav>
+            <a href="https://www.google.com">Leave Store</a>
+        </nav>
+    </header>
+    
+    <section class="filters">
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="3d printed">3D Printed</button>
+            <button class="category-btn" data-category="art">Art</button>
+            <button class="category-btn" data-category="clothes">Clothes</button>
+        </div>
+    </section>
+    
+    <section class="products-grid" id="products-container">
+        <!-- Products are populated by JavaScript -->
+    </section>
+    
+    <script>
+        // Sample product catalogue
+        const products = [
+            {
+                id: 1,
+                name: "3D Printed Red Rose",
+                price: 29.99,
+                category: "3d printed",
+                image: "rose.jpg",
+                url: "https://buy.stripe.com/test_cN29BE77ocava1G9AB"
+            },
+            {
+                id: 2,
+                name: "Sacramento Wood Map",
+                price: 59.99,
+                category: "art",
+                image: "map.png",
+                url: "/products/sacramento-wood-map"
+            },
+            {
+                id: 3,
+                name: "Blue Knit Hat",
+                price: 39.99,
+                category: "clothes",
+                image: "blue.png",
+                url: "/products/blue-knit-hat"
+            },
+            {
+                id: 4,
+                name: "White Knit Hat",
+                price: 34.99,
+                category: "clothes",
+                image: "white.png",
+                url: "/products/white-knit-hat"
+            },
+            {
+                id: 5,
+                name: "Bronze Donkey Statue",
+                price: 199.99,
+                category: "art",
+                image: "donkey.png",
+                url: "/products/bronze-donkey-statue"
+            },
+            {
+                id: 6,
+                name: "3D Printed Spork",
+                price: 2.99,
+                category: "3d printed",
+                image: "spork.png",
+                url: "/products/3d-printed-spork"
+            },
+            {
+                id: 7,
+                name: "Gray Knitted Sweater - Large",
+                price: 69.99,
+                category: "clothes",
+                image: "sweater.png",
+                url: "/products/gray-knitted-sweater-large"
+            },
+        ];
+        
+        // DOM elements
+        const productsContainer = document.getElementById('products-container');
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        
+        let filteredProducts = [...products];
+        let currentCategory = 'all';
+        
+        // Render products to the DOM
+        function renderProducts() {
+            productsContainer.innerHTML = '';
+            
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('a');
+                productCard.className = 'product-card';
+                productCard.href = product.url;
+                productCard.target = "_blank";
+                productCard.rel = "noopener noreferrer";
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">$${product.price.toFixed(2)}</div>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
+
+        // Filter products by category
+        function filterProducts() {
+            if (currentCategory === 'all') {
+                filteredProducts = [...products];
+            } else {
+                filteredProducts = products.filter(product => product.category === currentCategory);
+            }
+            
+            renderProducts();
+        }
+        
+        // Event listeners
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active state
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Update current category and filter products
+                currentCategory = button.getAttribute('data-category');
+                filterProducts();
+            });
+        });
+        
+        // Initial render
+        filterProducts();
+    </script>
+</body>
+<footer>
+    <nav_footer>
+        <div class="footer">
+                <a href="https://www.makerbee.io" target="_blank">
+                    <img src="Makerbee.png" alt="Makerbee Logo">
+                </a>
+            </div>
+    </nav_footer>
+</footer>
+</html>
