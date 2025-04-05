@@ -26,18 +26,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #777;
             margin-bottom: 40px;
         }
 
         footer {
-            padding: 20px 20px 20px;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
             margin-top: 30px;
             background-color: #fde89c;
+            width: 100%;
         }
 
         .footer img {
@@ -74,19 +75,13 @@
 
         nav_footer {
             display: flex;
-            gap: 20px;
+            gap: 10px;
+            align-items: center;
         }
         
         nav_footer a {
-            text-decoration: none;
             color: #364F6A;
             font-size: 16px;
-            transition: color 0.2s;
-        }
-        
-        nav_footer a:hover {
-            color: #5E489B;
-            text-decoration: underline;
         }
         
         .filters {
@@ -358,11 +353,14 @@
 </body>
 <footer>
     <nav_footer>
+        <div class="nav_footer">
+            <a>Store by</a>
+        </div>
         <div class="footer">
-                <a href="https://www.makerbee.io" target="_blank">
-                    <img src="https://laeeqkdqrkjtjnltmgym.supabase.co/storage/v1/object/public/photos//Makerbee.png" alt="Makerbee Logo">
-                </a>
-            </div>
+            <a href="https://www.makerbee.io" target="_blank">
+                <img src="https://laeeqkdqrkjtjnltmgym.supabase.co/storage/v1/object/public/photos//Makerbee.png" alt="Makerbee Logo">
+            </a>
+        </div>
     </nav_footer>
 </footer>
 </html>
